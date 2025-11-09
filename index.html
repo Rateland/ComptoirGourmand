@@ -1,0 +1,933 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Le Comptoir Gourmand - Restaurant</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            line-height: 1.6;
+            color: #333;
+        }
+
+        /* Navigation */
+        nav {
+            position: fixed;
+            top: 0;
+            width: 100%;
+            background: rgba(255, 255, 255, 0.98);
+            box-shadow: 0 2px 10px rgba(0,0,0,0.1);
+            z-index: 1000;
+            transition: all 0.3s ease;
+        }
+
+        nav.scrolled {
+            padding: 0.5rem 0;
+        }
+
+        .nav-container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 1rem 2rem;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+        }
+
+        .logo {
+            font-size: 1.5rem;
+            font-weight: bold;
+            color: #d4a373;
+        }
+
+        .nav-links {
+            display: flex;
+            gap: 2rem;
+            list-style: none;
+        }
+
+        .nav-links a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s ease;
+        }
+
+        .nav-links a:hover {
+            color: #d4a373;
+        }
+
+        /* Hero Section */
+        .hero {
+            height: 100vh;
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            text-align: center;
+            color: white;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .hero-placeholder {
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.5)),
+                        repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(255,255,255,.03) 35px, rgba(255,255,255,.03) 70px);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-size: 1.2rem;
+            color: rgba(255,255,255,0.3);
+        }
+
+        .hero-content {
+            position: relative;
+            z-index: 1;
+            max-width: 800px;
+            padding: 2rem;
+            animation: fadeInUp 1s ease;
+        }
+
+        .hero h1 {
+            font-size: 4rem;
+            margin-bottom: 1rem;
+            font-weight: 300;
+            letter-spacing: 2px;
+        }
+
+        .hero p {
+            font-size: 1.5rem;
+            margin-bottom: 2rem;
+            color: #d4a373;
+        }
+
+        .cta-button {
+            display: inline-block;
+            padding: 1rem 3rem;
+            background: #d4a373;
+            color: white;
+            text-decoration: none;
+            font-size: 1.1rem;
+            font-weight: 600;
+            border-radius: 50px;
+            transition: all 0.3s ease;
+            border: none;
+            cursor: pointer;
+        }
+
+        .cta-button:hover {
+            background: #c49363;
+            transform: translateY(-3px);
+            box-shadow: 0 10px 20px rgba(212, 163, 115, 0.3);
+        }
+
+        /* Sections génériques */
+        section {
+            padding: 5rem 2rem;
+            max-width: 1200px;
+            margin: 0 auto;
+            opacity: 0;
+            transform: translateY(30px);
+            transition: all 0.6s ease;
+        }
+
+        section.visible {
+            opacity: 1;
+            transform: translateY(0);
+        }
+
+        .section-title {
+            text-align: center;
+            font-size: 2.5rem;
+            margin-bottom: 1rem;
+            color: #2d2d2d;
+        }
+
+        .section-subtitle {
+            text-align: center;
+            color: #d4a373;
+            margin-bottom: 3rem;
+            font-size: 1.1rem;
+        }
+
+        /* About Section */
+        .about-content {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 3rem;
+            align-items: center;
+        }
+
+        .about-text {
+            padding: 2rem;
+        }
+
+        .about-text p {
+            margin-bottom: 1.5rem;
+            font-size: 1.1rem;
+            line-height: 1.8;
+        }
+
+        .about-image {
+            height: 400px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            border-radius: 10px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #999;
+            font-size: 1.1rem;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .about-image::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(0,0,0,.03) 35px, rgba(0,0,0,.03) 70px);
+        }
+
+        /* Menu Section */
+        .menu-categories {
+            display: flex;
+            justify-content: center;
+            gap: 2rem;
+            margin-bottom: 3rem;
+            flex-wrap: wrap;
+        }
+
+        .menu-category {
+            padding: 0.8rem 2rem;
+            background: white;
+            border: 2px solid #d4a373;
+            border-radius: 50px;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            font-weight: 600;
+        }
+
+        .menu-category.active,
+        .menu-category:hover {
+            background: #d4a373;
+            color: white;
+        }
+
+        .menu-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .menu-item {
+            padding: 2rem;
+            background: white;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+            transition: all 0.3s ease;
+        }
+
+        .menu-item:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 10px 25px rgba(0,0,0,0.15);
+        }
+
+        .menu-item h3 {
+            color: #2d2d2d;
+            margin-bottom: 0.5rem;
+            font-size: 1.3rem;
+        }
+
+        .menu-item p {
+            color: #666;
+            margin-bottom: 1rem;
+            font-size: 0.95rem;
+        }
+
+        .menu-price {
+            color: #d4a373;
+            font-weight: bold;
+            font-size: 1.2rem;
+        }
+
+        /* Gallery Section */
+        .gallery-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+            gap: 1.5rem;
+        }
+
+        .gallery-item {
+            height: 300px;
+            background: linear-gradient(135deg, #f5f5f5 0%, #e0e0e0 100%);
+            border-radius: 10px;
+            overflow: hidden;
+            position: relative;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .gallery-item::before {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            right: 0;
+            bottom: 0;
+            background: repeating-linear-gradient(45deg, transparent, transparent 35px, rgba(0,0,0,.03) 35px, rgba(0,0,0,.03) 70px);
+        }
+
+        .gallery-item::after {
+            content: '📷 Votre photo ici';
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+            color: #999;
+            font-size: 1rem;
+        }
+
+        .gallery-item:hover {
+            transform: scale(1.05);
+        }
+
+        /* Reviews Section */
+        #avis {
+            background: #f9f9f9;
+        }
+
+        .reviews-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 2rem;
+        }
+
+        .review-card {
+            background: white;
+            padding: 2rem;
+            border-radius: 10px;
+            box-shadow: 0 5px 15px rgba(0,0,0,0.08);
+        }
+
+        .review-stars {
+            color: #d4a373;
+            font-size: 1.2rem;
+            margin-bottom: 1rem;
+        }
+
+        .review-text {
+            font-style: italic;
+            color: #555;
+            margin-bottom: 1rem;
+            line-height: 1.6;
+        }
+
+        .review-author {
+            font-weight: bold;
+            color: #2d2d2d;
+        }
+
+        /* Info Section */
+        .info-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+            gap: 3rem;
+            margin-top: 3rem;
+        }
+
+        .info-card {
+            text-align: center;
+            padding: 2rem;
+        }
+
+        .info-icon {
+            font-size: 3rem;
+            margin-bottom: 1rem;
+        }
+
+        .info-card h3 {
+            color: #2d2d2d;
+            margin-bottom: 1rem;
+        }
+
+        .info-card p {
+            color: #666;
+            line-height: 1.8;
+        }
+
+        /* Reservation Form */
+        #reservation {
+            background: linear-gradient(135deg, #1a1a1a 0%, #2d2d2d 100%);
+            color: white;
+        }
+
+        #reservation .section-title,
+        #reservation .section-subtitle {
+            color: white;
+        }
+
+        .reservation-form {
+            max-width: 600px;
+            margin: 0 auto;
+            background: rgba(255,255,255,0.05);
+            padding: 3rem;
+            border-radius: 15px;
+            backdrop-filter: blur(10px);
+        }
+
+        .form-group {
+            margin-bottom: 1.5rem;
+        }
+
+        .form-group label {
+            display: block;
+            margin-bottom: 0.5rem;
+            color: #d4a373;
+            font-weight: 600;
+        }
+
+        .form-group input,
+        .form-group select,
+        .form-group textarea {
+            width: 100%;
+            padding: 1rem;
+            border: 1px solid rgba(255,255,255,0.2);
+            border-radius: 5px;
+            background: rgba(255,255,255,0.1);
+            color: white;
+            font-size: 1rem;
+            transition: all 0.3s ease;
+        }
+
+        .form-group input:focus,
+        .form-group select:focus,
+        .form-group textarea:focus {
+            outline: none;
+            border-color: #d4a373;
+            background: rgba(255,255,255,0.15);
+        }
+
+        .form-group input::placeholder,
+        .form-group textarea::placeholder {
+            color: rgba(255,255,255,0.5);
+        }
+
+        .form-message {
+            margin-top: 1rem;
+            padding: 1rem;
+            border-radius: 5px;
+            text-align: center;
+            display: none;
+        }
+
+        .form-message.success {
+            background: rgba(76, 175, 80, 0.2);
+            border: 1px solid #4CAF50;
+            color: #4CAF50;
+        }
+
+        /* Footer */
+        footer {
+            background: #1a1a1a;
+            color: white;
+            padding: 3rem 2rem 1rem;
+        }
+
+        .footer-content {
+            max-width: 1200px;
+            margin: 0 auto;
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 3rem;
+            margin-bottom: 2rem;
+        }
+
+        .footer-section h3 {
+            color: #d4a373;
+            margin-bottom: 1rem;
+        }
+
+        .footer-section p,
+        .footer-section a {
+            color: #ccc;
+            text-decoration: none;
+            display: block;
+            margin-bottom: 0.5rem;
+        }
+
+        .footer-section a:hover {
+            color: #d4a373;
+        }
+
+        .social-links {
+            display: flex;
+            gap: 1rem;
+            margin-top: 1rem;
+        }
+
+        .social-links a {
+            width: 40px;
+            height: 40px;
+            background: rgba(212, 163, 115, 0.2);
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            transition: all 0.3s ease;
+        }
+
+        .social-links a:hover {
+            background: #d4a373;
+            transform: translateY(-3px);
+        }
+
+        .footer-bottom {
+            text-align: center;
+            padding-top: 2rem;
+            border-top: 1px solid rgba(255,255,255,0.1);
+            color: #999;
+        }
+
+        /* Animations */
+        @keyframes fadeInUp {
+            from {
+                opacity: 0;
+                transform: translateY(30px);
+            }
+            to {
+                opacity: 1;
+                transform: translateY(0);
+            }
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .hero h1 {
+                font-size: 2.5rem;
+            }
+
+            .hero p {
+                font-size: 1.2rem;
+            }
+
+            .nav-links {
+                display: none;
+            }
+
+            .about-content {
+                grid-template-columns: 1fr;
+            }
+
+            .section-title {
+                font-size: 2rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <!-- Navigation -->
+    <nav id="navbar">
+        <div class="nav-container">
+            <div class="logo">Le Comptoir Gourmand</div>
+            <ul class="nav-links">
+                <li><a href="#accueil">Accueil</a></li>
+                <li><a href="#presentation">À propos</a></li>
+                <li><a href="#carte">Notre Carte</a></li>
+                <li><a href="#galerie">Galerie</a></li>
+                <li><a href="#avis">Avis</a></li>
+                <li><a href="#reservation">Réserver</a></li>
+            </ul>
+        </div>
+    </nav>
+
+    <!-- Hero Section -->
+    <section class="hero" id="accueil">
+        <div class="hero-placeholder">IMAGE HERO - Restaurant ambiance (1920x1080)</div>
+        <div class="hero-content">
+            <h1>Le Comptoir Gourmand</h1>
+            <p>Une expérience culinaire authentique</p>
+            <a href="#reservation" class="cta-button">Réserver une table</a>
+        </div>
+    </section>
+
+    <!-- About Section -->
+    <section id="presentation">
+        <h2 class="section-title">Bienvenue</h2>
+        <p class="section-subtitle">L'art de la gastronomie française</p>
+        <div class="about-content">
+            <div class="about-text">
+                <p>Depuis notre ouverture, Le Comptoir Gourmand s'est imposé comme une référence de la cuisine française authentique. Notre chef et son équipe vous proposent une carte généreuse, élaborée avec des produits frais et de saison.</p>
+                <p>Dans un cadre chaleureux et convivial, nous vous invitons à découvrir notre passion pour la gastronomie. Chaque plat est préparé avec soin pour vous offrir une expérience mémorable.</p>
+                <p>Que ce soit pour un déjeuner d'affaires, un dîner en amoureux ou une soirée entre amis, notre équipe est à votre disposition pour rendre votre moment unique.</p>
+            </div>
+            <div class="about-image">
+                <span style="position: relative; z-index: 1;">IMAGE - Intérieur restaurant (600x400)</span>
+            </div>
+        </div>
+    </section>
+
+    <!-- Menu Section -->
+    <section id="carte">
+        <h2 class="section-title">Notre Carte</h2>
+        <p class="section-subtitle">Des saveurs qui racontent une histoire</p>
+        
+        <div class="menu-categories">
+            <div class="menu-category active" data-category="entrees">Entrées</div>
+            <div class="menu-category" data-category="plats">Plats</div>
+            <div class="menu-category" data-category="desserts">Desserts</div>
+        </div>
+
+        <div class="menu-grid" id="menu-items">
+            <!-- Les items de menu seront injectés ici -->
+        </div>
+    </section>
+
+    <!-- Gallery Section -->
+    <section id="galerie">
+        <h2 class="section-title">Galerie</h2>
+        <p class="section-subtitle">Découvrez notre univers en images</p>
+        <div class="gallery-grid">
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+            <div class="gallery-item"></div>
+        </div>
+    </section>
+
+    <!-- Reviews Section -->
+    <section id="avis">
+        <h2 class="section-title">Avis de nos clients</h2>
+        <p class="section-subtitle">Ce qu'ils pensent de nous</p>
+        <div class="reviews-grid">
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Une expérience culinaire exceptionnelle ! Les plats sont délicieux et le service impeccable. Je recommande vivement."</p>
+                <p class="review-author">— Marie D.</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Cadre chaleureux et accueillant. La cuisine est raffinée et les portions généreuses. Notre nouveau restaurant préféré !"</p>
+                <p class="review-author">— Thomas L.</p>
+            </div>
+            <div class="review-card">
+                <div class="review-stars">★★★★★</div>
+                <p class="review-text">"Un vrai régal du début à la fin. L'équipe est aux petits soins et l'ambiance parfaite pour un dîner en amoureux."</p>
+                <p class="review-author">— Sophie M.</p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Info Section -->
+    <section id="infos">
+        <h2 class="section-title">Informations Pratiques</h2>
+        <div class="info-grid">
+            <div class="info-card">
+                <div class="info-icon">🕒</div>
+                <h3>Horaires</h3>
+                <p>
+                    <strong>Déjeuner</strong><br>
+                    Mar - Dim : 12h00 - 14h30<br><br>
+                    <strong>Dîner</strong><br>
+                    Mar - Sam : 19h00 - 22h30<br><br>
+                    Fermé le lundi
+                </p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">📍</div>
+                <h3>Adresse</h3>
+                <p>
+                    15 Rue de la Gastronomie<br>
+                    75001 Paris<br>
+                    France<br><br>
+                    Métro : Ligne 1, 4, 7
+                </p>
+            </div>
+            <div class="info-card">
+                <div class="info-icon">📞</div>
+                <h3>Contact</h3>
+                <p>
+                    Téléphone : 01 23 45 67 89<br>
+                    Email : contact@comptoirgourmand.fr<br><br>
+                    Réservations recommandées
+                </p>
+            </div>
+        </div>
+    </section>
+
+    <!-- Reservation Section -->
+    <section id="reservation">
+        <h2 class="section-title">Réservez votre table</h2>
+        <p class="section-subtitle">Nous serons ravis de vous accueillir</p>
+        
+        <form class="reservation-form" id="reservationForm">
+            <div class="form-group">
+                <label for="name">Nom complet *</label>
+                <input type="text" id="name" name="name" required placeholder="Votre nom">
+            </div>
+            
+            <div class="form-group">
+                <label for="email">Email *</label>
+                <input type="email" id="email" name="email" required placeholder="votre@email.com">
+            </div>
+            
+            <div class="form-group">
+                <label for="phone">Téléphone *</label>
+                <input type="tel" id="phone" name="phone" required placeholder="06 12 34 56 78">
+            </div>
+            
+            <div class="form-group">
+                <label for="date">Date *</label>
+                <input type="date" id="date" name="date" required>
+            </div>
+            
+            <div class="form-group">
+                <label for="time">Heure *</label>
+                <select id="time" name="time" required>
+                    <option value="">Choisir une heure</option>
+                    <option value="12:00">12h00</option>
+                    <option value="12:30">12h30</option>
+                    <option value="13:00">13h00</option>
+                    <option value="13:30">13h30</option>
+                    <option value="14:00">14h00</option>
+                    <option value="19:00">19h00</option>
+                    <option value="19:30">19h30</option>
+                    <option value="20:00">20h00</option>
+                    <option value="20:30">20h30</option>
+                    <option value="21:00">21h00</option>
+                    <option value="21:30">21h30</option>
+                    <option value="22:00">22h00</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="guests">Nombre de personnes *</label>
+                <select id="guests" name="guests" required>
+                    <option value="">Choisir</option>
+                    <option value="1">1 personne</option>
+                    <option value="2">2 personnes</option>
+                    <option value="3">3 personnes</option>
+                    <option value="4">4 personnes</option>
+                    <option value="5">5 personnes</option>
+                    <option value="6">6 personnes</option>
+                    <option value="7">7 personnes</option>
+                    <option value="8">8 personnes</option>
+                    <option value="more">Plus de 8</option>
+                </select>
+            </div>
+            
+            <div class="form-group">
+                <label for="message">Message (optionnel)</label>
+                <textarea id="message" name="message" rows="4" placeholder="Allergies, demandes spéciales..."></textarea>
+            </div>
+            
+            <button type="submit" class="cta-button">Confirmer la réservation</button>
+            
+            <div class="form-message" id="formMessage"></div>
+        </form>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="footer-content">
+            <div class="footer-section">
+                <h3>Le Comptoir Gourmand</h3>
+                <p>Une cuisine authentique et raffinée dans un cadre chaleureux au cœur de Paris.</p>
+                <div class="social-links">
+                    <a href="#" aria-label="Facebook">f</a>
+                    <a href="#" aria-label="Instagram">📷</a>
+                    <a href="#" aria-label="TripAdvisor">T</a>
+                </div>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Liens rapides</h3>
+                <a href="#presentation">À propos</a>
+                <a href="#carte">Notre carte</a>
+                <a href="#galerie">Galerie</a>
+                <a href="#reservation">Réserver</a>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Contact</h3>
+                <p>📍 15 Rue de la Gastronomie, 75001 Paris</p>
+                <p>📞 01 23 45 67 89</p>
+                <p>✉️ contact@comptoirgourmand.fr</p>
+            </div>
+            
+            <div class="footer-section">
+                <h3>Horaires</h3>
+                <p><strong>Déjeuner :</strong> Mar-Dim 12h-14h30</p>
+                <p><strong>Dîner :</strong> Mar-Sam 19h-22h30</p>
+                <p>Fermé le lundi</p>
+            </div>
+        </div>
+        
+        <div class="footer-bottom">
+            <p>&copy; 2024 Le Comptoir Gourmand. Tous droits réservés.</p>
+        </div>
+    </footer>
+
+    <script>
+        // Menu data
+        const menuData = {
+            entrees: [
+                { name: "Terrine de campagne maison", description: "Accompagnée de cornichons et pain grillé", price: "12€" },
+                { name: "Salade de chèvre chaud", description: "Miel, noix et mesclun de saison", price: "14€" },
+                { name: "Soupe à l'oignon gratinée", description: "Recette traditionnelle, croûtons et fromage fondu", price: "11€" },
+                { name: "Assiette de charcuterie", description: "Sélection du moment, pain de campagne", price: "16€" }
+            ],
+            plats: [
+                { name: "Bœuf bourguignon", description: "Mijoté au vin rouge, légumes et pommes de terre", price: "24€" },
+                { name: "Confit de canard", description: "Cuisse confite, pommes sarladaises et salade", price: "22€" },
+                { name: "Pavé de saumon", description: "Sauce à l'oseille, riz basmati et légumes", price: "23€" },
+                { name: "Magret de canard", description: "Sauce aux figues, gratin dauphinois", price: "26€" },
+                { name: "Blanquette de veau", description: "À l'ancienne, riz et champignons", price: "21€" },
+                { name: "Plat végétarien du jour", description: "Selon inspiration du chef et saison", price: "19€" }
+            ],
+            desserts: [
+                { name: "Tarte Tatin", description: "Servie tiède avec crème fraîche", price: "9€" },
+                { name: "Fondant au chocolat", description: "Cœur coulant, glace vanille", price: "10€" },
+                { name: "Crème brûlée", description: "Vanille de Madagascar, caramélisée minute", price: "8€" },
+                { name: "Profiteroles", description: "Glace vanille, sauce chocolat chaud", price: "11€" },
+                { name: "Café gourmand", description: "Café et assortiment de mini-desserts", price: "9€" }
+            ]
+        };
+
+        // Display menu items
+        function displayMenu(category) {
+            const menuContainer = document.getElementById('menu-items');
+            menuContainer.innerHTML = '';
+            
+            menuData[category].forEach(item => {
+                const menuItem = document.createElement('div');
+                menuItem.className = 'menu-item';
+                menuItem.innerHTML = `
+                    <h3>${item.name}</h3>
+                    <p>${item.description}</p>
+                    <span class="menu-price">${item.price}</span>
+                `;
+                menuContainer.appendChild(menuItem);
+            });
+        }
+
+        // Menu category switching
+        document.querySelectorAll('.menu-category').forEach(btn => {
+            btn.addEventListener('click', function() {
+                document.querySelectorAll('.menu-category').forEach(b => b.classList.remove('active'));
+                this.classList.add('active');
+                displayMenu(this.dataset.category);
+            });
+        });
+
+        // Initialize menu with entrées
+        displayMenu('entrees');
+
+        // Smooth scroll for navigation
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                const target = document.querySelector(this.getAttribute('href'));
+                if (target) {
+                    target.scrollIntoView({
+                        behavior: 'smooth',
+                        block: 'start'
+                    });
+                }
+            });
+        });
+
+        // Scroll animations
+        const observerOptions = {
+            threshold: 0.1,
+            rootMargin: '0px 0px -100px 0px'
+        };
+
+        const observer = new IntersectionObserver((entries) => {
+            entries.forEach(entry => {
+                if (entry.isIntersecting) {
+                    entry.target.classList.add('visible');
+                }
+            });
+        }, observerOptions);
+
+        document.querySelectorAll('section').forEach(section => {
+            observer.observe(section);
+        });
+
+        // Navbar scroll effect
+        let lastScroll = 0;
+        window.addEventListener('scroll', () => {
+            const navbar = document.getElementById('navbar');
+            const currentScroll = window.pageYOffset;
+
+            if (currentScroll > 100) {
+                navbar.classList.add('scrolled');
+            } else {
+                navbar.classList.remove('scrolled');
+            }
+
+            lastScroll = currentScroll;
+        });
+
+        // Form submission
+        document.getElementById('reservationForm').addEventListener('submit', function(e) {
+            e.preventDefault();
+            
+            const formMessage = document.getElementById('formMessage');
+            const formData = new FormData(this);
+            
+            // Validation simple
+            const name = formData.get('name');
+            const email = formData.get('email');
+            const phone = formData.get('phone');
+            const date = formData.get('date');
+            const time = formData.get('time');
+            const guests = formData.get('guests');
+
+            if (!name || !email || !phone || !date || !time || !guests) {
+                formMessage.textContent = 'Veuillez remplir tous les champs obligatoires.';
+                formMessage.className = 'form-message';
+                formMessage.style.display = 'block';
+                formMessage.style.background = 'rgba(244, 67, 54, 0.2)';
+                formMessage.style.borderColor = '#f44336';
+                formMessage.style.color = '#f44336';
+                return;
+            }
+
+            // Simulate form submission
+            formMessage.textContent = `Merci ${name} ! Votre réservation pour ${guests} personne(s) le ${new Date(date).toLocaleDateString('fr-FR')} à ${time} a bien été enregistrée. Nous vous confirmerons par email à ${email}.`;
+            formMessage.className = 'form-message success';
+            formMessage.style.display = 'block';
+            
+            // Reset form
+            this.reset();
+            
+            // Hide message after 8 seconds
+            setTimeout(() => {
+                formMessage.style.display = 'none';
+            }, 8000);
+        });
+
+        // Set minimum date to today for reservation
+        const today = new Date().toISOString().split('T')[0];
+        document.getElementById('date').setAttribute('min', today);
+    </script>
+</body>
+</html>
