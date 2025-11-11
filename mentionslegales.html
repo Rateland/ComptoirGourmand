@@ -6,201 +6,192 @@
   <title>Mentions légales - Le Comptoir Gourmand</title>
   <style>
     *{margin:0;padding:0;box-sizing:border-box}
-    :root{--primary:#8B4513;--secondary:#D2691E;--accent:#CD853F;--dark:#3E2723;--light:#FFF8DC;--cream:#FAEBD7}
-    body{font-family:'Georgia','Times New Roman',serif;line-height:1.7;color:var(--dark);background:var(--cream)}
-    nav{background:linear-gradient(to bottom,var(--dark) 0%,#5D4037 100%);box-shadow:0 4px 12px rgba(0,0,0,.3);position:sticky;top:0;z-index:1000;border-bottom:3px solid var(--accent)}
-    .nav-container{max-width:1400px;margin:0 auto;display:flex;justify-content:space-between;align-items:center;padding:1.2rem 2rem}
-    .logo{font-size:2rem;font-weight:bold;color:var(--light);text-shadow:2px 2px 4px rgba(0,0,0,.5);font-family:'Georgia',serif;letter-spacing:1px;text-decoration:none;display:block}
-    .logo span{color:var(--accent);font-style:italic}
-    .nav-links{display:flex;gap:0;list-style:none}
-    .nav-links li{position:relative}
-    .nav-links a{display:block;padding:1rem 1.5rem;text-decoration:none;color:var(--light);font-weight:500;font-size:1rem;transition:all .3s ease;border-right:1px solid rgba(255,255,255,.1)}
-    .nav-links li:first-child a{border-left:1px solid rgba(255,255,255,.1)}
-    .nav-links a:hover,.nav-links a.active{background:var(--secondary);color:#fff}
-    .menu-toggle{display:none;background:var(--accent);border:none;padding:.8rem 1.2rem;color:#fff;font-size:1.5rem;cursor:pointer;border-radius:5px}
-    .page-header{background:linear-gradient(rgba(62,39,35,.85),rgba(62,39,35,.85));padding:6rem 2rem 4rem;text-align:center;color:#fff;position:relative}
-    .page-header-bg{position:absolute;inset:0;background:repeating-linear-gradient(90deg,transparent,transparent 2px,rgba(139,69,19,.1) 2px,rgba(139,69,19,.1) 4px),repeating-linear-gradient(0deg,transparent,transparent 2px,rgba(139,69,19,.1) 2px,rgba(139,69,19,.1) 4px),linear-gradient(135deg,#5D4037 0%,#3E2723 100%);z-index:0;display:flex;align-items:center;justify-content:center;font-size:1.2rem;color:rgba(255,255,255,.15)}
-    .page-header-content{position:relative;z-index:1;max-width:800px;margin:0 auto}
-    .page-header h1{font-size:4rem;margin-bottom:1rem;text-shadow:3px 3px 6px rgba(0,0,0,.5)}
-    .page-header p{font-size:1.5rem;color:var(--accent);font-style:italic}
-    .content{max-width:1400px;margin:0 auto;padding:5rem 2rem}
-    .intro-text{text-align:center;max-width:900px;margin:0 auto 3.5rem;background:#fff;padding:2.5rem;border-radius:10px;box-shadow:0 5px 20px rgba(0,0,0,.1);border-top:4px solid var(--accent)}
-    .intro-text p{font-size:1.1rem;color:#555}
-    .carte-section{background:#fff;padding:4rem;border-radius:10px;box-shadow:0 10px 30px rgba(0,0,0,.1);border-top:5px solid var(--accent)}
-    .carte-section h2{font-size:2.5rem;color:var(--primary);text-align:center;margin-bottom:3rem;position:relative}
-    .carte-section h2::after{content:'';position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:100px;height:3px;background:var(--accent)}
-    .carte-grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(420px,1fr));gap:2rem;margin-top:2rem}
-    .carte-category h3{font-size:1.6rem;color:var(--primary);margin-bottom:1rem;padding-bottom:.6rem;border-bottom:2px solid var(--accent)}
-    .carte-item{padding:1rem 0;border-bottom:1px solid rgba(139,69,19,.1)}
-    .carte-item:last-child{border-bottom:none}
-    .carte-item-name{font-size:1.15rem;font-weight:600;color:var(--dark);margin-bottom:.35rem}
-    .carte-item-desc{font-size:1rem;color:#5b5b5b}
-    footer{background:linear-gradient(to bottom,var(--dark) 0%,#1a0f0a 100%);color:var(--light);padding:4rem 2rem 2rem;border-top:4px solid var(--accent)}
-    .footer-content{max-width:1400px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(280px,1fr));gap:4rem;margin-bottom:3rem}
-    .footer-section h3{color:var(--accent);margin-bottom:1.5rem;font-size:1.5rem}
-    .footer-section p,.footer-section a{color:var(--light);text-decoration:none;display:block;margin-bottom:.8rem;font-size:1.05rem;transition:color .3s ease}
-    .footer-section a:hover{color:var(--accent)}
-    .footer-links a::before{content:'→ ';color:var(--accent)}
-    .footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);color:rgba(255,255,255,.6)}
-    @media (max-width:1024px){.nav-links{position:fixed;top:80px;right:-100%;width:300px;height:calc(100vh - 80px);background:var(--dark);flex-direction:column;padding:2rem 0;transition:right .3s ease;box-shadow:-5px 0 15px rgba(0,0,0,.3)}.nav-links.active{right:0}.nav-links a{border-right:none;border-bottom:1px solid rgba(255,255,255,.1);padding:1.5rem 2rem}.nav-links li:first-child a{border-left:none}.menu-toggle{display:block}.carte-grid{grid-template-columns:1fr}}
-    @media (max-width:768px){.page-header h1{font-size:2.5rem}.content{padding:3rem 1.5rem}.carte-section{padding:2rem}}
+    body{font-family:'Segoe UI',Tahoma,Geneva,Verdana,sans-serif;line-height:1.6;color:#333}
+
+    /* NAV */
+    nav{position:fixed;top:0;width:100%;background:rgba(255,255,255,.98);box-shadow:0 2px 10px rgba(0,0,0,.1);z-index:1000;transition:all .3s ease}
+    nav.scrolled{padding:.5rem 0}
+    .nav-container{max-width:1200px;margin:0 auto;padding:1rem 2rem;display:flex;justify-content:space-between;align-items:center}
+    .logo{font-size:1.5rem;font-weight:bold;color:#d4a373}
+    .nav-links{display:flex;gap:2rem;list-style:none}
+    .nav-links a{text-decoration:none;color:#333;font-weight:500;transition:color .3s ease}
+    .nav-links a:hover,.nav-links a.active{color:#d4a373}
+
+    /* HERO */
+    .hero{height:45vh;background:linear-gradient(135deg,#1a1a1a 0%,#2d2d2d 100%);display:flex;align-items:center;justify-content:center;text-align:center;color:#fff;position:relative;overflow:hidden}
+    .hero-placeholder{position:absolute;inset:0;background:linear-gradient(rgba(0,0,0,.5),rgba(0,0,0,.5)),repeating-linear-gradient(45deg,transparent,transparent 35px,rgba(255,255,255,.03) 35px,rgba(255,255,255,.03) 70px);display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:rgba(255,255,255,.35)}
+    .hero-content{position:relative;z-index:1;max-width:900px;padding:2rem;animation:fadeInUp 1s ease}
+    .hero h1{font-size:3rem;margin-bottom:.75rem;font-weight:300;letter-spacing:1px}
+    .hero p{font-size:1.2rem;color:#d4a373}
+
+    /* GENERIC SECTIONS */
+    section{padding:5rem 2rem;max-width:1200px;margin:0 auto;opacity:0;transform:translateY(30px);transition:all .6s ease}
+    section.visible{opacity:1;transform:translateY(0)}
+    .section-title{text-align:center;font-size:2.2rem;margin-bottom:1rem;color:#2d2d2d}
+    .section-subtitle{text-align:center;color:#d4a373;margin-bottom:2.5rem;font-size:1.05rem}
+
+    .grid{display:grid;grid-template-columns:repeat(auto-fit,minmax(320px,1fr));gap:2rem}
+    .card{background:#fff;border-radius:10px;box-shadow:0 5px 15px rgba(0,0,0,.08);padding:2rem}
+    .card h3{color:#2d2d2d;margin-bottom:.5rem}
+    .muted{color:#666}
+
+    footer{background:#1a1a1a;color:#fff;padding:3rem 2rem 1rem}
+    .footer-content{max-width:1200px;margin:0 auto;display:grid;grid-template-columns:repeat(auto-fit,minmax(250px,1fr));gap:3rem;margin-bottom:2rem}
+    .footer-section h3{color:#d4a373;margin-bottom:1rem}
+    .footer-section p,.footer-section a{color:#ccc;text-decoration:none;display:block;margin-bottom:.5rem}
+    .footer-section a:hover{color:#d4a373}
+    .footer-bottom{text-align:center;padding-top:2rem;border-top:1px solid rgba(255,255,255,.1);color:#999}
+
+    @keyframes fadeInUp{from{opacity:0;transform:translateY(30px)}to{opacity:1;transform:translateY(0)}}
+
+    @media (max-width:768px){.nav-links{display:none}.hero h1{font-size:2rem}.hero p{font-size:1rem}}
   </style>
 </head>
 <body>
-  <nav>
+  <nav id="navbar">
     <div class="nav-container">
-      <a href="index.html" class="logo">Le Comptoir <span>Gourmand</span></a>
-      <ul class="nav-links" id="navLinks">
-        <li><a href="index.html">Accueil</a></li>
-        <li><a href="menus.html">Menus</a></li>
-        <li><a href="vins.html">Vins & Champagnes</a></li>
-        <li><a href="cafes.html">Cafés & Thés</a></li>
-        <li><a href="snacking.html">Snacking</a></li>
-        <li><a href="histoire.html">Notre Histoire</a></li>
-        <li><a href="contact.html">Contact</a></li>
+      <div class="logo">Le Comptoir Gourmand</div>
+      <ul class="nav-links">
+        <li><a href="index.html#accueil">Accueil</a></li>
+        <li><a href="index.html#presentation">À propos</a></li>
+        <li><a href="index.html#carte">Notre Carte</a></li>
+        <li><a href="index.html#galerie">Galerie</a></li>
+        <li><a href="index.html#reservation">Réserver</a></li>
+        <li><a href="mentionslegales.html" class="active">Mentions légales</a></li>
+        <li><a href="confidentialite.html">Confidentialité</a></li>
       </ul>
-      <button class="menu-toggle" id="menuToggle">☰</button>
     </div>
   </nav>
 
-  <section class="page-header">
-    <div class="page-header-bg"><span style="position:relative;z-index:1;">IMAGE HEADER - Mentions légales (1920x400)</span></div>
-    <div class="page-header-content">
+  <header class="hero" style="margin-top:64px">
+    <div class="hero-placeholder">IMAGE HEADER - Mentions légales (1920x600)</div>
+    <div class="hero-content">
       <h1>Mentions légales</h1>
       <p>Informations légales du site</p>
     </div>
-  </section>
+  </header>
 
-  <div class="content">
-    <div class="intro-text">
-      <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec vel sapien et neque finibus faucibus. Curabitur posuere, nunc in congue efficitur, lacus velit semper nulla, sed ultrices velit nibh sit amet libero.</p>
-    </div>
-
-    <div class="carte-section">
-      <h2>Informations</h2>
-      <div class="carte-grid">
-        <div class="carte-category">
-          <h3>Éditeur du site</h3>
-          <div class="carte-item">
-            <div class="carte-item-name">Raison sociale</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer vel sodales velit, nec iaculis justo.</div>
-          </div>
-          <div class="carte-item">
-            <div class="carte-item-name">Adresse</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, 00000 Lorem — Lorem ipsum dolor sit amet.</div>
-          </div>
-          <div class="carte-item">
-            <div class="carte-item-name">Contact</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet — Tél. 00 00 00 00 00 — Email lorem@ipsum.com</div>
-          </div>
-          <div class="carte-item">
-            <div class="carte-item-name">Directeur de la publication</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Vestibulum a orci sit amet metus fermentum sodales.</div>
-          </div>
-        </div>
-
-        <div class="carte-category">
-          <h3>Hébergeur</h3>
-          <div class="carte-item">
-            <div class="carte-item-name">Identité & coordonnées</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse condimentum, lacus at sagittis luctus, urna arcu pulvinar lorem, in sodales mi nisl et arcu.</div>
-          </div>
-          <div class="carte-item">
-            <div class="carte-item-name">Localisation des serveurs</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Praesent in arcu sit amet libero facilisis finibus.</div>
-          </div>
-        </div>
-
-        <div class="carte-category">
-          <h3>Propriété intellectuelle</h3>
-          <div class="carte-item">
-            <div class="carte-item-name">Contenus & marques</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque vitae nisl sit amet tellus pharetra vehicula. Cras maximus, lorem sed posuere feugiat, sem velit suscipit risus, vitae posuere lorem lorem nec nisi.</div>
-          </div>
-          <div class="carte-item">
-            <div class="carte-item-name">Licence d'utilisation</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit odio id quam pretium, non egestas diam posuere.</div>
-          </div>
-        </div>
-
-        <div class="carte-category">
-          <h3>Responsabilités</h3>
-          <div class="carte-item">
-            <div class="carte-item-name">Disponibilité & exactitude</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac sapien id orci faucibus auctor. Sed ut tincidunt arcu, at sagittis ligula.</div>
-          </div>
-          <div class="carte-item">
-            <div class="carte-item-name">Liens externes</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Etiam at sem et lacus aliquet sollicitudin. Integer aliquet velit id urna gravida, in dignissim massa sodales.</div>
-          </div>
-        </div>
-
-        <div class="carte-category">
-          <h3>Cookies & données</h3>
-          <div class="carte-item">
-            <div class="carte-item-name">Informations</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="confidentialite.html">Voir notre politique de confidentialité</a>.</div>
-          </div>
-        </div>
-
-        <div class="carte-category">
-          <h3>Droit applicable</h3>
-          <div class="carte-item">
-            <div class="carte-item-name">Juridiction</div>
-            <div class="carte-item-desc">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo, arcu at bibendum cursus, nisl augue pulvinar ante, vitae porttitor arcu leo non ante.</div>
-          </div>
-        </div>
+  <section class="visible">
+    <h2 class="section-title">Éditeur du site</h2>
+    <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Raison sociale</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer posuere semper felis, vitae posuere urna pretium non. Sed lacinia, justo a aliquet faucibus, ipsum mi tincidunt mi, id maximus justo neque ut lorem.</p>
+      </div>
+      <div class="card">
+        <h3>Adresse</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, 00000 Lorem. Vestibulum viverra, mauris id fermentum viverra, lorem mauris placerat lacus, in laoreet nunc ligula non nisl.</p>
+      </div>
+      <div class="card">
+        <h3>Contact</h3>
+        <p class="muted">Téléphone : 00 00 00 00 00<br/>Email : lorem@ipsum.com</p>
+      </div>
+      <div class="card">
+        <h3>Directeur de la publication</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Curabitur id lacus ut mi vehicula sodales.</p>
       </div>
     </div>
-  </div>
+  </section>
 
-      <footer>
-        <div class="footer-content">
-            <div class="footer-section">
-                <h3>Le Comptoir Gourmand</h3>
-                <p>Une cuisine authentique et raffinée dans un cadre chaleureux au cœur de Paris.</p>
-                <div class="social-links">
-                    <a href="#" aria-label="Facebook">f</a>
-                    <a href="#" aria-label="Instagram">📷</a>
-                    <a href="#" aria-label="TripAdvisor">T</a>
-                </div>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Liens rapides</h3>
-                <a href="#presentation">À propos</a>
-                <a href="#carte">Notre carte</a>
-                <a href="#galerie">Galerie</a>
-                <a href="#reservation">Réserver</a>
-                <a href="mentionslegales.html">Mentions légales</a>
-                <a href="confidentialite.html">Politique de confidentialité</a>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Contact</h3>
-                <p>📍 15 Rue de la Gastronomie, 75001 Paris</p>
-                <p>📞 01 23 45 67 89</p>
-                <p>✉️ contact@comptoirgourmand.fr</p>
-            </div>
-            
-            <div class="footer-section">
-                <h3>Horaires</h3>
-                <p><strong>Déjeuner :</strong> Mar-Dim 12h-14h30</p>
-                <p><strong>Dîner :</strong> Mar-Sam 19h-22h30</p>
-                <p>Fermé le lundi</p>
-            </div>
-        </div>
-        
-        <div class="footer-bottom">
-            <p>&copy; 2024 Le Comptoir Gourmand. Tous droits réservés.</p>
-        </div>
-    </footer>
+  <section class="visible">
+    <h2 class="section-title">Hébergeur</h2>
+    <p class="section-subtitle">Lorem ipsum dolor sit amet</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Identité & coordonnées</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse potenti. Maecenas non magna volutpat, pulvinar justo vitae, congue nisi.</p>
+      </div>
+      <div class="card">
+        <h3>Localisation des serveurs</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec non feugiat augue. Integer elementum sem vel lorem scelerisque, a sodales velit ullamcorper.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="visible">
+    <h2 class="section-title">Propriété intellectuelle</h2>
+    <p class="section-subtitle">Lorem ipsum dolor sit amet, consectetur adipiscing elit</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Contenus & marques</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque auctor, tortor ac luctus hendrerit, urna arcu dictum nisl, sit amet congue neque augue ac ipsum. Integer dictum feugiat lorem, et dapibus mi.</p>
+      </div>
+      <div class="card">
+        <h3>Licence d'utilisation</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer suscipit odio id quam pretium, non egestas diam posuere. Aenean consequat dictum nisl.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="visible">
+    <h2 class="section-title">Responsabilités</h2>
+    <p class="section-subtitle">Lorem ipsum dolor sit amet</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Disponibilité & exactitude</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Morbi ac sapien id orci faucibus auctor. Sed ut tincidunt arcu, at sagittis ligula.</p>
+      </div>
+      <div class="card">
+        <h3>Liens externes</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Integer aliquet velit id urna gravida, in dignissim massa sodales.</p>
+      </div>
+    </div>
+  </section>
+
+  <section class="visible">
+    <h2 class="section-title">Cookies & données</h2>
+    <p class="section-subtitle">Lorem ipsum dolor sit amet</p>
+    <div class="grid">
+      <div class="card">
+        <h3>Informations</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. <a href="confidentialite.html">Voir notre politique de confidentialité</a>.</p>
+      </div>
+      <div class="card">
+        <h3>Droit applicable</h3>
+        <p class="muted">Lorem ipsum dolor sit amet, consectetur adipiscing elit. Donec commodo, arcu at bibendum cursus, nisl augue pulvinar ante, vitae porttitor arcu leo non ante.</p>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="footer-content">
+      <div class="footer-section">
+        <h3>Le Comptoir Gourmand</h3>
+        <p>Une cuisine authentique et raffinée dans un cadre chaleureux au cœur de Paris.</p>
+      </div>
+      <div class="footer-section">
+        <h3>Liens rapides</h3>
+        <a href="index.html#presentation">À propos</a>
+        <a href="index.html#carte">Notre carte</a>
+        <a href="index.html#galerie">Galerie</a>
+        <a href="index.html#reservation">Réserver</a>
+        <a href="mentionslegales.html">Mentions légales</a>
+        <a href="confidentialite.html">Politique de confidentialité</a>
+      </div>
+      <div class="footer-section">
+        <h3>Contact</h3>
+        <p>📍 15 Rue de la Gastronomie, 75001 Paris</p>
+        <p>📞 01 23 45 67 89</p>
+        <p>✉️ contact@comptoirgourmand.fr</p>
+      </div>
+      <div class="footer-section">
+        <h3>Horaires</h3>
+        <p><strong>Déjeuner :</strong> Mar-Dim 12h-14h30</p>
+        <p><strong>Dîner :</strong> Mar-Sam 19h-22h30</p>
+        <p>Fermé le lundi</p>
+      </div>
+    </div>
+    <div class="footer-bottom"><p>&copy; 2024 Le Comptoir Gourmand. Tous droits réservés.</p></div>
+  </footer>
+
   <script>
-    const menuToggle=document.getElementById('menuToggle');
-    const navLinks=document.getElementById('navLinks');
-    if(menuToggle){menuToggle.addEventListener('click',()=>{navLinks.classList.toggle('active');menuToggle.textContent=navLinks.classList.contains('active')?'✕':'☰';});}
-    document.addEventListener('click',(e)=>{if(!e.target.closest('nav')){navLinks.classList.remove('active');if(menuToggle)menuToggle.textContent='☰';}});
-    navLinks.querySelectorAll('a').forEach(link=>{link.addEventListener('click',()=>{if(window.innerWidth<=1024){navLinks.classList.remove('active');if(menuToggle)menuToggle.textContent='☰';}})});
+    // Navbar scroll effect
+    window.addEventListener('scroll',()=>{
+      const navbar=document.getElementById('navbar');
+      if(!navbar) return; // in case id changes
+      if(window.pageYOffset>100){navbar.classList.add('scrolled')}else{navbar.classList.remove('scrolled')}
+    });
   </script>
 </body>
 </html>
